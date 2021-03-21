@@ -1,5 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
-export default axios.create({
-  baseURL: 'https://7emy2tazo2.execute-api.us-east-1.amazonaws.com/api/'
-})
+axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
+// axios.defaults.headers['crossorigin'] = 'true';
+
+const createdAxios = axios.create({
+  baseURL: "https://fskba5swil.execute-api.us-east-1.amazonaws.com/api"
+});
+
+export default createdAxios;

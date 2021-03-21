@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -35,7 +35,7 @@ export default new Router({
       component: () => import("./views/festivals/Edit.vue")
     },
     //////////////////
-    
+
     /////PERFORMERS/////
     {
       path: "/performers",
@@ -58,7 +58,7 @@ export default new Router({
       component: () => import("./views/performers/Edit.vue")
     },
     //////////////////
-    
+
     /////SHOWS/////
     {
       path: "/shows",
@@ -71,7 +71,7 @@ export default new Router({
       component: () => import("./views/shows/Create.vue")
     },
     {
-      path: "shows/:id",
+      path: "/shows/:id",
       name: "shows_show",
       component: () => import("./views/shows/Show.vue")
     },
@@ -81,7 +81,7 @@ export default new Router({
       component: () => import("./views/shows/Edit.vue")
     },
     //////////////////
-    
+
     /////STAGE/////
     {
       path: "/stages",
@@ -104,5 +104,48 @@ export default new Router({
       component: () => import("./views/stages/Edit.vue")
     },
     //////////////////
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("./components/cognito/login.vue"),
+      meta: {
+        noAuth: true
+      }
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import("./components/cognito/register.vue"),
+      meta: {
+        noAuth: true
+      }
+    },
+    {
+      path: "/confirm",
+      name: "confirm",
+      component: () => import("./components/cognito/confirm.vue"),
+      meta: {
+        noAuth: true
+      }
+    }
   ]
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (!to.matched.some(record => record.meta.noAuth)) {
+//     // this route requires auth, check if logged in
+//     // if not, redirect to login page.
+//     if (localStorage.getItem("token")) {
+//       next({
+//         path: '/login',
+//         query: { redirect: to.fullPath }
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next() // make sure to always call next()!
+//   }
+// })
+
+export default router;
